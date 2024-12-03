@@ -1,4 +1,5 @@
 import threading
+from decimal import Decimal
 
 from src.model.color import Color
 
@@ -15,10 +16,10 @@ class Pixel:
     green: int
     blue: int
     hit_count: int
-    normal: float
+    normal: Decimal
     lock_for_color: threading.RLock
 
-    def __init__(self, red: int, green: int, blue: int, hit_count: int, normal: float) -> None:
+    def __init__(self, red: int, green: int, blue: int, hit_count: int, normal: float | Decimal) -> None:
         """
         Конструктор для инициализации пикселя с указанными параметрами.
 

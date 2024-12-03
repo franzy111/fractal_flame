@@ -1,4 +1,5 @@
 import random
+from decimal import Decimal
 from typing import Final
 
 from src.model.color import Color
@@ -13,15 +14,15 @@ class AffineCoefficient:
 
     MAX_COLOR_RANGE: Final[int] = 255
 
-    a: float
-    b: float
-    c: float
-    d: float
-    e: float
-    f: float
+    a: Decimal
+    b: Decimal
+    c: Decimal
+    d: Decimal
+    e: Decimal
+    f: Decimal
     color: Color
 
-    def __init__(self, coefficients: dict[str, float], color: Color) -> None:
+    def __init__(self, coefficients: dict[str, Decimal], color: Color) -> None:
         """
         Инициализирует объект с коэффициентами и цветом.
 
@@ -47,21 +48,21 @@ class AffineCoefficient:
         :param random_instance: Экземпляр random, используемый для генерации случайных значений.
         :return: Новый объект AffineCoefficient с случайными коэффициентами и цветом.
         """
-        c = random_instance.uniform(-1, 1)
-        f = random_instance.uniform(-1, 1)
+        c = Decimal(random_instance.uniform(-1, 1))
+        f = Decimal(random_instance.uniform(-1, 1))
 
         while True:
-            a = random_instance.uniform(-1, 1)
-            b = random_instance.uniform(-1, 1)
-            d = random_instance.uniform(-1, 1)
-            e = random_instance.uniform(-1, 1)
+            a = Decimal(random_instance.uniform(-1, 1))
+            b = Decimal(random_instance.uniform(-1, 1))
+            d = Decimal(random_instance.uniform(-1, 1))
+            e = Decimal(random_instance.uniform(-1, 1))
             if AffineCoefficient.is_affine(a, b, d, e):
                 break
 
         color = Color(random_instance.randint(0, AffineCoefficient.MAX_COLOR_RANGE),
                  random_instance.randint(0, AffineCoefficient.MAX_COLOR_RANGE),
                  random_instance.randint(0, AffineCoefficient.MAX_COLOR_RANGE))
-        coefficients: dict[str, float] = {
+        coefficients: dict[str, Decimal] = {
             "a": a,
             "b": b,
             "c": c,
@@ -72,7 +73,7 @@ class AffineCoefficient:
         return AffineCoefficient(coefficients, color)
 
     @staticmethod
-    def is_affine(a: float, b: float, d: float, e: float) -> bool:
+    def is_affine(a: float | Decimal, b: float | Decimal, d: float | Decimal, e: float | Decimal) -> bool:
         """
         Проверяет, соответствуют ли заданные коэффициенты условиям аффинного преобразования.
 

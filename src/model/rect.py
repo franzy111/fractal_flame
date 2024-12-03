@@ -1,15 +1,17 @@
 import math
+from decimal import Decimal
 
 from src.model.point import Point
 
 
 class Rect:
-    x: float
-    y: float
-    width: float
-    height: float
+    x: Decimal
+    y: Decimal
+    width: Decimal
+    height: Decimal
 
-    def __init__(self, x: float, y: float, width: float, height: float) -> None:
+    def __init__(self, x: float | Decimal, y: float | Decimal,
+                 width: float | Decimal, height: float | Decimal) -> None:
         """
         Класс Rect представляет прямоугольник в двумерной системе координат.
 
@@ -20,10 +22,10 @@ class Rect:
         :param width: Ширина прямоугольника.
         :param height: Высота прямоугольника.
         """
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
+        self.x = Decimal(x)
+        self.y = Decimal(y)
+        self.width = Decimal(width)
+        self.height = Decimal(height)
 
     def contains(self, p: Point) -> bool:
         """
@@ -45,8 +47,10 @@ class Rect:
         center_x = self.x + self.width / 2
         center_y = self.y + self.height / 2
 
-        rotate_x = (point.x - center_x) * math.cos(angle) - (point.y - center_y) * math.sin(angle) + center_x
-        rotate_y = (point.x - center_x) * math.sin(angle) + (point.y - center_y) * math.cos(angle) + center_y
+        rotate_x = ((point.x - center_x) * Decimal(math.cos(angle)) - (point.y - center_y)
+                    * Decimal(math.sin(angle)) + center_x)
+        rotate_y = ((point.x - center_x) * Decimal(math.sin(angle)) + (point.y - center_y)
+                    * Decimal(math.cos(angle)) + center_y)
 
         return Point(rotate_x, rotate_y)
 
