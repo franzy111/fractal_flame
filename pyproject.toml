@@ -7,20 +7,60 @@ authors = ["n.beskodarov <n.beskodarov@tinkoff.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
+requests = "^2.32.3"
 
-
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
 isort = "^5.13.2"
 ruff = "^0.6.1"
 pytest = "*"
 pytest-cov = "*"
 pytest-deadfixtures = "*"
+pytest-check = "*"
 pytest-mock = "*"
 pytest-repeat = "*"
 pytest-asyncio = "*"
+coverage = "*"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D10",
+    "D203", # incompatible with other lints
+    "D212",
+    "COM812", # incompatible with formatter
+    "ISC001",
+    "RUF001",
+    "RUF002",
+    "UP007",
+    "D40",
+    "D41",
+    "D200",
+    "S311",
+    "T201",
+    "PERF203",
+    "TRY301",
+    "TRY003",
+    "EM101",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    # at least these three should be fine in tests:
+    "S101", # asserts allowed in tests...
+    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    # The ones below are debatable
+    "PLR2004", # Magic value used in comparison, ...
+    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+    "S106", # hardcoded password in tests,
+    "SLF001", # access to private methods may be useful
+    "INP001",
+]
