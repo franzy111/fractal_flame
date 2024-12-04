@@ -47,7 +47,7 @@ class FractalGenerator:
             saver = FormatImageSaver(config.get("saver.format"))
             saver.save(
                 image,
-                Path(f"{config.get("saver.path")}.{config.get("saver.format")}")
+                Path(f"{config.get('saver.path')}.{config.get('saver.format')}")
             )
 
             logger.info("Fractal image saved successfully.")
