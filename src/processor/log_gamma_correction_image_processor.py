@@ -43,7 +43,7 @@ class LogGammaCorrectionImageProcessor(ImageProcessor):
         :param image: Объект FractalImage, представляющий изображение фрактала.
         :return: Максимальное значение нормализации.
         """
-        max_value = 0.0
+        max_value = 0.00000001
         for y in range(image.height):
             for x in range(image.width):
                 pixel = image.pixel(x, y)
@@ -63,10 +63,7 @@ class LogGammaCorrectionImageProcessor(ImageProcessor):
             for x in range(image.width):
                 pixel = image.pixel(x, y)
                 if pixel is not None:
-                    # Нормализация значения нормализованного пикселя
                     pixel.normal /= max_value
-
-                    # Применение гамма-коррекции к цветовым компонентам
                     correction_factor = math.pow(pixel.normal, 1.0 / self.gamma)
                     pixel.red = int(pixel.red * correction_factor)
                     pixel.green = int(pixel.green * correction_factor)

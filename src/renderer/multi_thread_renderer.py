@@ -1,4 +1,4 @@
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 from src.model.fractal_image import FractalImage
 from src.model.rect import Rect
@@ -41,7 +41,7 @@ class MultiThreadRenderer(AbstractRenderer):
         :param world: Прямоугольник, определяющий область видимости фрактала.
         :param affine_transformations: Список аффинных преобразований.
         """
-        with ProcessPoolExecutor() as executor:
+        with ThreadPoolExecutor() as executor:
             tasks = [executor.submit(self.render_one_sample, image, world, affine_transformations)
                      for _ in range(self.samples)]
             for task in tasks:

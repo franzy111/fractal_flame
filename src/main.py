@@ -1,5 +1,7 @@
 import logging
-import platform
+
+from src.generator.fractal_generator import FractalGenerator
+from src.ui.command_line_args import CommandLineArgs
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
@@ -7,7 +9,9 @@ logger = logging.getLogger(__name__)
 
 
 def main() -> None:
-    logger.info(platform.python_version())
+    config = CommandLineArgs()
+    fractal_generator = FractalGenerator()
+    fractal_generator.run(config)
 
 
 if __name__ == "__main__":
