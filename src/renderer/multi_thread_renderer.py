@@ -14,7 +14,7 @@ class MultiThreadRenderer(AbstractRenderer):
     Использует пул процессов для параллельного выполнения нескольких выборок фрактала.
     """
 
-    def __init__(self, steps_for_normalization: int, affine_count: int,  # noqa: PLR0913
+    def __init__(self, steps_for_normalization: int, affine_count: int,
                  samples: int, iter_per_sample: int, symmetry: int,
                  variations: list[Transformation]) -> None:
         """

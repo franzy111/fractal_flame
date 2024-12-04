@@ -13,7 +13,7 @@ class SingleThreadRenderer(AbstractRenderer):
     Каждый сэмпл фрактала обрабатывается последовательно, без использования многозадачности.
     """
 
-    def __init__(self, steps_for_normalization: int, affine_count: int, samples: int,  # noqa: PLR0913
+    def __init__(self, steps_for_normalization: int, affine_count: int, samples: int,
                  iter_per_sample: int, symmetry: int, variations: list[Transformation]) -> None:
         """
         Инициализирует параметры рендеринга.
